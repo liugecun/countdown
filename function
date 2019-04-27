@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS实现倒计时</title>
+    <style>
+        *{ margin:0; padding:0; list-style:none;}
+        body{ font-size:18px; text-align:center;}
+        .time{ height:30px; padding:200px;}
+    </style>
+</head>
+<body>
+	<div class="time">
+		<div id="showInterval1"></div>
+		<div id="showInterval2"></div>
+		<div id="showInterval3"></div>
+		<div id="showInterval4"></div>
+	</div>
+	<script type="text/javascript">
+		function getDistanceTime(time,showInt){
+			var endTime = new Date(Date.parse(time.replace(/-/g, '/')));
+			var nowTime = new Date()
+			var distance = endTime.getTime() - nowTime.getTime();
+
+			var day = 0;
+			var hour = 0;
+			var minutes = 0;
+			var second = 0;
+
+			if (distance >= 0) {
+				day = Math.floor(distance/1000/60/60/24);
+				hour = Math.floor(distance/1000/60/60%24);
+				minutes = Math.floor(distance/1000/60%60);
+				second = Math.floor(distance/1000%60)
+			}else{
+				console.log("已结束！")
+			}
+			getEle('#'+showInt).innerHTML = day + '天' + hour + '时' + minutes + "分" + second + "秒";
+		}
+
+		function getEle(name){
+			return document.querySelector(name)
+		}
+
+		setInterval(function(){
+			getDistanceTime('2019-04-1 12:00:00','showInterval1')
+		},1000)
+		setInterval(function(){
+			getDistanceTime('2019-05-1 12:00:00','showInterval2')
+		},1000)
+		setInterval(function(){
+			getDistanceTime('2019-06-1 12:00:00','showInterval3')
+		},1000)
+		setInterval(function(){
+			getDistanceTime('2019-07-1 12:00:00','showInterval4')
+		},1000)
+	</script>
+</body>
+</html>
